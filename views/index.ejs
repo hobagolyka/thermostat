@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title><%= title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="s.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1><%= name%></h1><h3 class="mode"><%= mode%></h3>
+    <div class="box">
+        <div class="row">
+            <div class="col-xs-8 col-sm-4 col-sm-offset-3"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> Current temperature:</div>
+            <div class="col-xs-4 col-sm-2 temp"><%= current_temp %> °C</div>
+        </div>
+    </div>
+    <form method="post" action="/set_vac">
+        <div class="box">
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 col-sm-offset-3"><span class="glyphicon glyphicon-plane" aria-hidden="true"></span> Holiday mode:</div>
+            </div>
+            <div class="row box">
+                <div class="col-xs-2 col-xs-offset-2 col-sm-1 col-sm-offset-4">
+                    <div class="plusminus" id="vacplus"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></div>
+                </div>
+                <div class="col-xs-4 col-sm-2 temp" align="center">
+                    <span id="vacation"><%= vacation_temp %></span> °C
+                    <input type="text" class="form-control hidden" id="vacation_temp" name="vacation_temp" value="<%= vacation_temp %>">
+                </div>
+                <div class="col-xs-2 col-sm-1">
+                    <div class="plusminus" id="vacminus"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-xs-offset-0 col-sm-6 col-sm-offset-3" align="center"><button type="submit" class="btn btn-default">SET HOLIDAY MODE</button></div>
+            </div>
+        </div>
+    </form>
+    <form method="POST" action="/set_hand">
+        <div class="box">
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 col-sm-offset-3"><span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span> Manual mode:</div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 col-xs-offset-2 col-sm-1 col-sm-offset-4">
+                    <div class="plusminus" id="handminus"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></div>
+                </div>
+                <div class="col-xs-4 col-sm-2 temp" align="center">
+                    <span id="hand"><%= hand_temp %></span> °C
+                    <input type="text" class="form-control hidden" id="hand_temp" name="hand_temp" value="<%= hand_temp %>">
+                </div>
+                <div class="col-xs-2 col-sm-1">
+                    <div class="plusminus" id="handplus"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 col-xs-offset-2 col-sm-1 col-sm-offset-4">
+                    <div class="plusminus" id="hourminus"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></div>
+                </div>
+                <div class="col-xs-4 col-sm-2 temp" align="center">
+                    <span id="hour">0</span> hour
+                    <input type="text" class="form-control hidden" id="hand_time" name="hand_time" value="0">
+                </div>
+                <div class="col-xs-2 col-sm-1">
+                    <div class="plusminus" id="hourplus"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row box">
+            <div class="col-xs-12 col-xs-offset-0 col-sm-6 col-sm-offset-3" align="center"><button type="submit" class="btn btn-default">SET HAND MODE</button></div>
+        </div>
+        <div class="row box">
+            <div class="col-xs-12 col-xs-offset-0 col-sm-6 col-sm-offset-3" align="center"><button type="submit" class="btn btn-default">SET SCHEDULE MODE</button></div>
+        </div>
+    </form>
+
+</div>
+<script>
+    $(document).ready(function(){
+
+        $("#vacplus").click(function(){
+            var v = $("#vacation").html();
+            v--;
+            $("#vacation").html(v);
+            $("#vacation_temp").val(v);
+        });
+
+        $("#vacminus").click(function(){
+            var v = $("#vacation").html();
+            v++;
+            $("#vacation").html(v);
+            $("#vacation_temp").val(v);
+        });
+
+        $("#handplus").click(function(){
+            var v = $("#hand").html();
+            v++;
+            $("#hand").html(v);
+            $("#hand_temp").val(v);
+        });
+
+        $("#handminus").click(function(){
+            var v = $("#hand").html();
+            v--;
+            $("#hand").html(v);
+            $("#hand_temp").val(v);
+        });
+
+        $("#hourplus").click(function(){
+            var v = $("#hour").html();
+            v++;
+            $("#hour").html(v);
+            $("#hand_time").val(v);
+        });
+
+        $("#hourminus").click(function(){
+            var v = $("#hour").html();
+            v--;
+            $("#hour").html(v);
+            $("#hand_time").val(v);
+        });
+
+    });
+</script>
+</body>
+</html>
